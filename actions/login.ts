@@ -2,7 +2,6 @@
 import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { LoginSchema } from "@/schemas";
-import { error } from "console";
 import { AuthError } from "next-auth";
 import * as z from "zod";
 export const login = async (values: z.infer<typeof LoginSchema>) => {
@@ -22,9 +21,9 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { error: "Invalid credentials!" };
+          return { error: "Invalid credentials!", success: "" };
         default:
-          return { error: "Something went wrong!" };
+          return { error: "Something went wrong!", success: "" };
       }
     }
     throw error;
